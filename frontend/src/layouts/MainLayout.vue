@@ -2,7 +2,7 @@
   <q-layout>
     <q-header>
       <q-bar class="bg-red-14">
-        <q-icon name="laptop_chromebook" />
+        <q-icon name="directions_car"/>
         <div>Oficina 2.0</div>
 
         <q-space />
@@ -14,8 +14,8 @@
 
       <div class="bg-red-5 q-pa-sm q-pl-md row items-center">
         <q-tabs v-model="tab">
-          <q-tab name="sellers" label="Vendedores" />
-          <q-tab name="budgets" label="Orçamentos" />
+          <q-route-tab name="sellers" to="/sellers" label="Vendedores" />
+          <q-route-tab name="budgets" to="/budgets" label="Orçamentos" />
         </q-tabs>
       </div>
       </q-header>
