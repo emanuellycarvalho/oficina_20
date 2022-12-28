@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreBudgetRequest;
 use App\Http\Requests\UpdateBudgetRequest;
+use Illuminate\Http\Request;
 use App\Models\Budget;
 
 class BudgetController extends Controller
@@ -76,5 +77,44 @@ class BudgetController extends Controller
                 'status' => 200,
             ]);
         }
+    }
+
+    /**
+     * Filter the budgets resources.
+     *
+     * @param  \App\Http\Requests\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function filter(Request $request)
+    {
+        $filters = $request->all();
+        isset($filters['end']) ? $end = $filters['end'] : $end = null;
+        isset($filters['begin']) ? $begin = $filters['begin'] : $begin = null;
+        isset($filters['seller']) ? $seller = $filters['seller'] : $seller = null;
+        isset($filters['client']) ? $client = $filters['client'] : $client = null;
+
+        $budgets = Budget::
+        when($client, function($query, $client){
+            $query->where('client', 'like', '%' . $client . '%');
+        })
+
+        ->when($seller, function($query, $seller){
+            $query->whereHas('seller', function($query) use ($seller){
+                $query->where('name', 'like', '%' . $seller . '%');
+            });
+        })
+
+        ->when($begin, function($query, $begin){
+            $query->whereDate('created_at', '>=', $begin);
+        })
+
+        ->when($end, function($query, $end){
+            $query->whereDate('created_at', '<=', $end);
+        })
+
+        ->with('seller')
+        ->get();
+
+        return $budgets;
     }
 }

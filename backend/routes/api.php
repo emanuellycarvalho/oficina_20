@@ -23,5 +23,6 @@ Route::prefix('sellers/')->group(function () {
 });
 
 Route::prefix('budgets/')->group(function () {
+    Route::get('filter', [BudgetController::class, 'filter']);
     Route::resource('/', BudgetController::class);
 });
