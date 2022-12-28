@@ -27,7 +27,7 @@ class StoreBudgetRequest extends FormRequest
             'client' => 'required',
             'description' => 'required',
             'value' => 'required|min:1',
-            'seller_id' => 'required|exists:sellers'
+            'seller_id' => 'required|exists:sellers,id'
         ];
     }
 
