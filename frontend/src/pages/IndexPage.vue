@@ -1,17 +1,16 @@
 <template>
   <q-page class="flex flex-center">
     <img
-      alt="Quasar logo"
-      src="~assets/quasar-logo-vertical.svg"
-      style="width: 200px; height: 200px"
+      alt="Uma mão carregando um carro vermelho"
+      src="~assets/car-on-hand.png"
+      style="max-width: 20%; max-height: 20%"
     >
   </q-page>
 </template>
 
 <script>
-import { defineComponent } from 'vue'
-
+import { defineComponent } from 'vue';
 export default defineComponent({
   name: 'IndexPage'
-})
+});
 </script>
