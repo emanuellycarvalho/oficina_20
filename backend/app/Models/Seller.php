@@ -15,6 +15,12 @@ class Seller extends Model
         'active'
     ];
 
+    protected $hidden = [
+        'id',
+        'created_at',
+        'updated_at'
+    ];
+
     public function budgets(){
         return $this->hasMany(Budget::class);
     }
