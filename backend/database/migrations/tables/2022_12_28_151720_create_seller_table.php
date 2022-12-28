@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('sellers', function (Blueprint $table) {
             $table->id();
             $table->string('name', 100);
-            $table->string('phone', 16);
+            $table->string('phone', 16)->nullable();
             $table->boolean('active')->default(true);
             $table->timestamps();
         });
