@@ -113,6 +113,7 @@ class BudgetController extends Controller
         })
 
         ->with('seller')
+        ->orderByDesc('created_at')
         ->get();
 
         return $budgets;
