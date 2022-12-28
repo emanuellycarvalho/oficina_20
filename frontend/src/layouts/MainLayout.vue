@@ -13,9 +13,10 @@
       </q-bar>
 
       <div class="bg-red-5 q-pa-sm q-pl-md row items-center">
-        <q-tabs v-model="tab">
-          <q-route-tab name="sellers" to="/sellers" label="Vendedores" />
-          <q-route-tab name="budgets" to="/budgets" label="Orçamentos" />
+        <q-tabs>
+          <q-route-tab exact name="home" to="/" label="Home" />
+          <q-route-tab exact name="sellers" to="/sellers" label="Vendedores" />
+          <q-route-tab exact name="budgets" to="/budgets" label="Orçamentos" />
         </q-tabs>
       </div>
       </q-header>
