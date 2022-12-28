@@ -19,6 +19,16 @@ class SellerController extends Controller
     }
 
     /**
+     * Display a listing of active sellers.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function active()
+    {
+        return Seller::where('active', true)->get();
+    }
+
+    /**
      * Store a newly created resource in storage.
      *
      * @param  \App\Http\Requests\StoreSellerRequest  $request
