@@ -7,7 +7,7 @@
         :columns="columns"
         row-key="id"
         virtual-scroll
-        v-model:pagination="pagination"
+        :pagination="pagination"
     >
 
         <template v-slot:top-right>
