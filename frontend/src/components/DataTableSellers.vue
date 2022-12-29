@@ -21,10 +21,8 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from "vue";
-import { useSellerStore } from "src/stores/seller";
+import { ref } from "vue";
 
-const sellerStore = useSellerStore();
 const filter = ref(null);
 
 const props = defineProps({
@@ -61,10 +59,6 @@ const columns = ref([
         sortable: true
     },
 ]);
-
-onMounted(() =>{
-    console.log(props);
-})
 
 </script>
   
