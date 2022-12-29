@@ -1,19 +1,20 @@
 <template>
     <q-page class="flex flex-center">
-        <DataTableConteudos :sellers="sellers"></DataTableConteudos>
+        <DataTableSellers :sellers="sellers"></DataTableSellers>
     </q-page>
 </template>
 
 <script setup>
 import { ref, onMounted } from 'vue';
 import { useSellerStore } from "src/stores/seller";
-import DataTableConteudos from "/src/components/DataTableSellers.vue"
+import DataTableSellers from "/src/components/DataTableSellers.vue"
 
 const sellerStore = useSellerStore();
-const sellers = ref(null);
+const sellers = ref([]);
 
 onMounted(() =>{
-    sellers.value = sellerStore.getActiveSellers();
+    sellerStore.getActiveSellers();
+    sellers.value = sellerStore.sellers;
 })
 
 </script>
