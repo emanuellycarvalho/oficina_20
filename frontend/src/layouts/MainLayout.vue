@@ -25,11 +25,6 @@
       <router-view />
     </q-page-container>
 
-    <q-footer reveal class="bg-red-14">
-      <q-toolbar>
-        <q-toolbar-title>Footer</q-toolbar-title>
-      </q-toolbar>
-    </q-footer>
   </q-layout>
 </template>
 
