@@ -39,5 +39,14 @@ export const useSellerStore = defineStore("seller", {
                 reuse.defaultMessage("Vendedores carregados com sucesso", "positive");
             });
         },
+
+        resetForm(){
+            this.form = {
+                id: null,
+                name: "",
+                phone: "",
+                active: null
+            }
+        }
     },
 });
