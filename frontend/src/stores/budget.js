@@ -18,6 +18,13 @@ export const useBudgetStore = defineStore("budget", {
                 active: null
             }
         }),
+
+        filter: useLocalStorage("budgets-store-filter", {
+            client: "",
+            sellet: "",
+            begin: null,
+            end: null
+        }),
     }),
 
     getters: {
@@ -36,5 +43,29 @@ export const useBudgetStore = defineStore("budget", {
                 reuse.defaultMessage("Vendedores carregados com sucesso", "positive");
             });
         },
+
+        resetForm(){
+            this.form = {
+                id: null,
+                client: "",
+                description: "",
+                value: null,
+                seller_id: null,
+                seller: {
+                    name: "",
+                    phone: "",
+                    active: null
+                }
+            }
+        },
+
+        resetFilter(){
+            this.filter = {
+                client: "",
+                sellet: "",
+                begin: null,
+                end: null
+            }
+        }
     },
 });

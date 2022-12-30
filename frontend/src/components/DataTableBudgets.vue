@@ -35,17 +35,17 @@
             >
                 <div class="row justify-center">
                     <q-input class="col col-5 q-ma-sm" name="client" v-model="budgetStore.form.client" color="red-5" label="Cliente" outlined clearable/>
-                    <q-input class="col col-5 q-ma-sm" name="client" v-model="budgetStore.form.seller" color="red-5" label="Vendedor" outlined clearable/>
+                    <q-select class="col col-5 q-ma-sm" name="seller" v-model="budgetStore.form.seller_id" option-value="id" option-label="name" :options="sellers" label="Vendedor" outlined/>
                 </div>
                 
                 <div class="row justify-center">
-                    <q-input class="col col-5 q-ma-sm" color="red-5" label-color="grey-7" outlined v-model="text" label="Data início">
+                    <q-input class="col col-5 q-ma-sm" color="red-5" label-color="grey-7" outlined v-model="budgetStore.filter.begin" label="Data início">
                         <template v-slot:append>
                             <q-icon name="event" />
                         </template>
                     </q-input>
 
-                    <q-input class="col col-5 q-ma-sm" color="red-5" label-color="grey-7" outlined v-model="text" label="Data fim">
+                    <q-input class="col col-5 q-ma-sm" color="red-5" label-color="grey-7" outlined v-model="budgetStore.filter.end" label="Data fim">
                         <template v-slot:append>
                             <q-icon name="event" />
                         </template>
@@ -73,6 +73,7 @@ const budgetStore = useBudgetStore();
 
 const props = defineProps({
     budgets: Array,
+    sellers: Array,
 });
 
 const pagination = ref({
