@@ -99,9 +99,7 @@ class BudgetController extends Controller
         })
 
         ->when($seller, function($query, $seller){
-            $query->whereHas('seller', function($query) use ($seller){
-                $query->where('name', 'like', '%' . $seller . '%');
-            });
+            $query->where('id', $seller);
         })
 
         ->when($begin, function($query, $begin){

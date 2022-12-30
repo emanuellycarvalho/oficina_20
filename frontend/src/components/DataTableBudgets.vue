@@ -31,30 +31,48 @@
         </q-bar>
 
         <q-card-section>
-            <q-form @submit="onSubmit" @reset="onReset"
-            >
+            <q-form>
                 <div class="row justify-center">
-                    <q-input class="col col-5 q-ma-sm" name="client" v-model="budgetStore.form.client" color="red-5" label="Cliente" outlined clearable/>
-                    <q-select class="col col-5 q-ma-sm" name="seller" v-model="budgetStore.form.seller_id" option-value="id" option-label="name" :options="sellers" label="Vendedor" outlined/>
+                    <q-input class="col-12 q-pa-md" name="client" v-model="budgetStore.filter.client" color="red-5" label="Cliente" outlined clearable/>
+                </div>
+
+                <div class="row justify-center">
+                    <q-select class="col-12 q-pa-md" name="seller" v-model="budgetStore.filter.seller" emit-value map-options color="red-5" option-value="id" option-label="name" :options="sellers" label="Vendedor" outlined/>
                 </div>
                 
                 <div class="row justify-center">
-                    <q-input class="col col-5 q-ma-sm" color="red-5" label-color="grey-7" outlined v-model="budgetStore.filter.begin" label="Data início">
-                        <template v-slot:append>
-                            <q-icon name="event" />
-                        </template>
-                    </q-input>
+                  <q-input class="col-6 q-pa-md" v-model="budgetStore.filter.begin" mask="date" :rules="['date']" outlined color="red-5">
+                    <template v-slot:append>
+                      <q-icon name="event" class="cursor-pointer">
+                        <q-popup-proxy cover transition-show="scale" transition-hide="scale">
+                          <q-date v-model="budgetStore.filter.begin" color="red-5" minimal>
+                            <div class="row items-center justify-end">
+                              <q-btn v-close-popup label="OK" color="red-5" flat/>
+                            </div>
+                          </q-date>
+                        </q-popup-proxy>
+                      </q-icon>
+                    </template>
+                  </q-input>
 
-                    <q-input class="col col-5 q-ma-sm" color="red-5" label-color="grey-7" outlined v-model="budgetStore.filter.end" label="Data fim">
-                        <template v-slot:append>
-                            <q-icon name="event" />
-                        </template>
-                    </q-input>
+                  <q-input class="col-6 q-pa-md" v-model="budgetStore.filter.end" mask="date" :rules="['date']" outlined color="red-5">
+                    <template v-slot:append>
+                      <q-icon name="event" class="cursor-pointer">
+                        <q-popup-proxy cover transition-show="scale" transition-hide="scale">
+                          <q-date v-model="budgetStore.filter.end" color="red-5" minimal>
+                            <div class="row items-center justify-end">
+                              <q-btn v-close-popup label="OK" color="red-5" flat/>
+                            </div>
+                          </q-date>
+                        </q-popup-proxy>
+                      </q-icon>
+                    </template>
+                  </q-input>
                 </div>
 
                 <div class="row justify-end q-mt-xl">
-                    <q-btn label="Filtrar" type="submit" color="red-5"/>
-                    <q-btn label="Resetar" type="reset" color="red-5" flat class="q-ml-sm" />
+                    <q-btn label="Filtrar" @click="() => {$emit('filter', budgetStore.filter); filterDialog = false}" color="red-5"/>
+                    <q-btn label="Resetar" @click.prevent.stop="budgetStore.resetFilter" color="red-5" flat class="q-ml-sm" />
                 </div>
             </q-form>
         </q-card-section>
@@ -66,6 +84,8 @@
 <script setup>
 import { ref } from "vue";
 import { useBudgetStore } from "src/stores/budget";
+
+const emits = ['filter'];
 
 const filter = ref(null);
 const filterDialog = ref(false);

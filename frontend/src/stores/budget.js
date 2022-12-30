@@ -5,7 +5,7 @@ import { useLocalStorage } from "@vueuse/core";
 
 export const useBudgetStore = defineStore("budget", {
     state: () => ({
-        budgets: useLocalStorage("budgets-store-budget", []),
+        budgets: useLocalStorage("budgets-store-budgets", []),
         form: useLocalStorage("budgets-store-form", {
             id: null,
             client: "",
@@ -21,7 +21,7 @@ export const useBudgetStore = defineStore("budget", {
 
         filter: useLocalStorage("budgets-store-filter", {
             client: "",
-            sellet: "",
+            seller: "",
             begin: null,
             end: null
         }),
@@ -40,7 +40,21 @@ export const useBudgetStore = defineStore("budget", {
             api.get(`/budgets`).then((response) => {
                 this.budgets = response.data;
                 reuse.hideLoading();
-                reuse.defaultMessage("Vendedores carregados com sucesso", "positive");
+                reuse.defaultMessage("Orçamentos carregados com sucesso", "positive");
+            });
+        },
+
+        filterBudgets(filter){
+            reuse.showLoading();
+            api.post(`/budgets/filter`, filter).then((response) => {
+                reuse.hideLoading();
+                this.resetFilter();
+                this.budgets = response.data;
+                reuse.defaultMessage("Orçamentos carregados com sucesso", "positive");
+            })
+            .catch((error) => {
+                reuse.hideLoading();
+                reuse.defaultMessage("Houve um erro ao carregar os orçamentos", "negative", error);
             });
         },
 
@@ -62,7 +76,7 @@ export const useBudgetStore = defineStore("budget", {
         resetFilter(){
             this.filter = {
                 client: "",
-                sellet: "",
+                seller: "",
                 begin: null,
                 end: null
             }
