@@ -45,10 +45,10 @@
         <q-dialog v-model="filterDialog">
             <q-card>
                 <q-bar>
-                <q-space />
-                <q-btn dense flat icon="close" v-close-popup>
-                    <q-tooltip>Fechar</q-tooltip>
-                </q-btn>
+                    <q-space />
+                    <q-btn dense flat icon="close" v-close-popup>
+                        <q-tooltip>Fechar</q-tooltip>
+                    </q-btn>
                 </q-bar>
 
                 <q-card-section>
@@ -62,32 +62,10 @@
                         </div>
                         
                         <div class="row justify-center">
-                        <q-input class="col-6 q-pa-md" v-model="filter.begin" mask="date" :rules="['date']" outlined color="red-5">
-                            <template v-slot:append>
-                            <q-icon name="event" class="cursor-pointer">
-                                <q-popup-proxy cover transition-show="scale" transition-hide="scale">
-                                <q-date v-model="filter.begin" color="red-5" minimal>
-                                    <div class="row items-center justify-end">
-                                    <q-btn v-close-popup label="OK" color="red-5" flat/>
-                                    </div>
-                                </q-date>
-                                </q-popup-proxy>
-                            </q-icon>
-                            </template>
+                        <q-input class="col-6 q-pa-md" v-model="filter.begin" type="date" stack-label mask="date" :rules="['date']" outlined color="red-5">
                         </q-input>
 
-                        <q-input class="col-6 q-pa-md" v-model="filter.end" mask="date" :rules="['date']" outlined color="red-5">
-                            <template v-slot:append>
-                            <q-icon name="event" class="cursor-pointer">
-                                <q-popup-proxy cover transition-show="scale" transition-hide="scale">
-                                <q-date v-model="filter.end" color="red-5" minimal>
-                                    <div class="row items-center justify-end">
-                                    <q-btn v-close-popup label="OK" color="red-5" flat/>
-                                    </div>
-                                </q-date>
-                                </q-popup-proxy>
-                            </q-icon>
-                            </template>
+                        <q-input class="col-6 q-pa-md" v-model="filter.end" type="date" stack-label mask="date" :rules="['date']" outlined color="red-5">
                         </q-input>
                         </div>
 

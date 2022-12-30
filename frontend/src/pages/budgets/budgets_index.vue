@@ -3,7 +3,7 @@
         <div class="row">
             <div class="col-lg-3 col-md-3 col-sm-12">
                 <CardFilters :currentFilter="budgetStore.filter" :sellers="sellerStore.sellers" @filter="filter($event)"></CardFilters>
-                <CardNewBudget></CardNewBudget>
+                <CardNewBudget :sellers="sellerStore.sellers"></CardNewBudget>
             </div>
 
             <div class="col-lg-9 col-md-8 col-sm-12">
