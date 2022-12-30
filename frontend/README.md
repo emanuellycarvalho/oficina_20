@@ -1,4 +1,4 @@
-# Oficina 2.0 (frontend)
+# Oficina 2.0 (oficina)
 
 A Quasar Project
 
