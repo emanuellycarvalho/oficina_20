@@ -3,6 +3,7 @@
         <div class="row">
             <div class="col-lg-3 col-md-3 col-sm-12">
                 <CardFilters :currentFilter="budgetStore.filter" :sellers="sellerStore.sellers" @filter="filter($event)"></CardFilters>
+                <CardNewBudget></CardNewBudget>
             </div>
 
             <div class="col-lg-9 col-md-8 col-sm-12">
@@ -17,6 +18,7 @@ import { onMounted } from 'vue';
 import { useBudgetStore } from "src/stores/budget";
 import { useSellerStore } from "src/stores/seller";
 import DataTableBudgets from "/src/components/DataTableBudgets.vue";
+import CardNewBudget from 'src/components/CardNewBudget.vue';
 import CardFilters from "src/components/CardFilter.vue";
 
 const budgetStore = useBudgetStore();
