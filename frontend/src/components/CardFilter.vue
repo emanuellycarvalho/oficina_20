@@ -11,8 +11,8 @@
                 <div v-if="filterOn">
                     <p v-if="currentFilter.client"><b>Cliente: </b> {{ currentFilter.client }} </p>
                     <p v-if="currentFilter.seller"><b>Vendedor: </b> {{ currentSeller.name }} </p>
-                    <p v-if="currentFilter.begin"><b>A partir de: </b> {{ currentFilter.begin }} </p>
-                    <p v-if="currentFilter.end"><b>Até: </b> {{ currentFilter.end }} </p>
+                    <p v-if="currentFilter.begin"><b>A partir de: </b> {{ reuse.dateFormatter(currentFilter.begin, "DD/MM/YYYY") }} </p>
+                    <p v-if="currentFilter.end"><b>Até: </b> {{ reuse.dateFormatter(currentFilter.end, "DD/MM/YYYY") }} </p>
                 </div>
                 <div v-else>
                     <p>
@@ -83,6 +83,7 @@
 <script setup>
 import { useSellerStore } from "src/stores/seller";
 import { ref, onMounted } from 'vue';
+import { reuse } from "boot/reuse";
 const emits = ['filter']
 
 const sellerStore = useSellerStore();
