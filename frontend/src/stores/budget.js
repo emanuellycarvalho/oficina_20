@@ -48,9 +48,9 @@ export const useBudgetStore = defineStore("budget", {
             reuse.showLoading();
             api.post(`/budgets/filter`, filter).then((response) => {
                 reuse.hideLoading();
-                this.resetFilter();
                 this.budgets = response.data;
                 reuse.defaultMessage("Orçamentos carregados com sucesso", "positive");
+                this.router.push({name: "budgets_index"});
             })
             .catch((error) => {
                 reuse.hideLoading();
