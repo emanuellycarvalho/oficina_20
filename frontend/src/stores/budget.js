@@ -41,6 +41,10 @@ export const useBudgetStore = defineStore("budget", {
                 this.budgets = response.data;
                 reuse.hideLoading();
                 reuse.defaultMessage("Orçamentos carregados com sucesso", "positive");
+            })
+            .catch((error) => {
+                reuse.hideLoading();
+                reuse.defaultMessage("Houve um erro ao carregar os orçamentos", "negative", error);
             });
         },
 

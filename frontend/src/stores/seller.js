@@ -28,6 +28,10 @@ export const useSellerStore = defineStore("seller", {
                 this.sellers = response.data;
                 reuse.hideLoading();
                 reuse.defaultMessage("Vendedores carregados com sucesso", "positive");
+            })
+            .catch((error) => {
+                reuse.hideLoading();
+                reuse.defaultMessage("Houve um erro ao carregar os vendedores", "negative", error);
             });
         },
 
@@ -37,6 +41,10 @@ export const useSellerStore = defineStore("seller", {
                 this.sellers = response.data;
                 reuse.hideLoading();
                 reuse.defaultMessage("Vendedores carregados com sucesso", "positive");
+            })
+            .catch((error) => {
+                reuse.hideLoading();
+                reuse.defaultMessage("Houve um erro ao carregar os vendedores", "negative", error);
             });
         },
 
