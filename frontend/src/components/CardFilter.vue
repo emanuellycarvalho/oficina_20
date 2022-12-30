@@ -2,7 +2,7 @@
     <div class="q-pa-md">
         <q-card class="my-card">
             <q-card-section class="bg-red-14 text-white">
-                <div class="text-h6 text-center">Filtrar orçamentos</div>
+                <div class="text-h6 text-center">FILTRAR ORÇAMENTOS</div>
             </q-card-section>
 
             <q-separator />
