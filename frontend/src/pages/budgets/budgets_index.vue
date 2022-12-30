@@ -24,7 +24,7 @@ const sellerStore = useSellerStore();
 
 const filter = (filter) => {
     budgetStore.filter = filter;
-    budgetStore.filterBudgets(filter);1 
+    budgetStore.filterBudgets(filter); 
 }
 
 onMounted(() =>{
