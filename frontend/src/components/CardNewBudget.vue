@@ -15,7 +15,17 @@
                     <q-form>
                         <div class="row justify-center">
                             <q-input class="col-6 q-pa-lg" autofocus hint="Nome e sobrenome" name="client" v-model="budget.client" color="red-5" label="Cliente" outlined clearable/>
-                            <q-input class="col-6 q-pa-lg" outlined v-model="number" type="number" label="Valor" color="red-14" prefix="$"/>
+                            <q-input 
+                                class="col-6 q-pa-lg" 
+                                outlined 
+                                v-model="budget.value" 
+                                label="Valor" 
+                                color="red-14"
+                                prefix="$"
+                                mask="#,##"
+                                fill-mask="0"
+                                reverse-fill-mask
+                            />
                         </div>
 
                         <div class="row justify-center">
