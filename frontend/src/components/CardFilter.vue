@@ -23,14 +23,22 @@
                 </div>
             </q-card-section>
 
-            <q-card-actions align="center">
+            <q-card-actions align="center" class="row">
                 <q-btn
                     icon="filter_alt"
+                    label="Fitrar"
                     @click="filterDialog = true"
-                    label="Fitros"
-                    class="q-ml-md bg-red-5"
+                    class="q-ml-md bg-red-5 col-5"
                     text-color="white"
                 />
+                <q-btn 
+                    v-if="filterOn"
+                    flat
+                    label="Remover" 
+                    @click.prevent.stop="() => { resetFilter(); $emit('filter', filter); }" 
+                    class="q-ml-sm col-5" 
+                    color="red-5"  
+                />                
             </q-card-actions>
         </q-card>
 
@@ -85,7 +93,7 @@
 
                         <div class="row justify-end q-mt-xl">
                             <q-btn label="Filtrar" @click="() => {$emit('filter', filter); filterDialog = false; filterOn = true;}" color="red-5"/>
-                            <q-btn label="Resetar" @click.prevent.stop="resetFilter()" color="red-5" flat class="q-ml-sm" />
+                            <q-btn label="Limpar" @click.prevent.stop="resetFilter()" color="red-5" flat class="q-ml-sm" />
                         </div>
                     </q-form>
                 </q-card-section>
