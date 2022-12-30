@@ -25,7 +25,7 @@ class SellerController extends Controller
      */
     public function active()
     {
-        return Seller::where('active', true)->get();
+        return Seller::where('active', true)->orderBy('name')->get();
     }
 
     /**
