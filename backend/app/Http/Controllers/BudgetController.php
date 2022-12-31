@@ -16,7 +16,7 @@ class BudgetController extends Controller
      */
     public function index()
     {
-        return Budget::with('seller')->get();
+        return Budget::with('seller')->orderByDesc('created_at')->get();
     }
 
     /**

@@ -11,7 +11,7 @@ export const useBudgetStore = defineStore("budget", {
             client: "",
             description: "",
             value: null,
-            seller_id: null,
+            seller: null,
             seller: {
                 name: "",
                 phone: "",
@@ -37,9 +37,14 @@ export const useBudgetStore = defineStore("budget", {
     actions: {
         create(budget){
             reuse.showLoading();
-            api.get(`/budgets`, budget).then((response) => {
+            budget.value = budget.value.replace('.', ''); 
+            budget.value = budget.value.replace(',', '.');
+            budget.value = parseFloat(budget.value);
+            console.log(budget);
+            api.post(`/budgets`, budget).then((response) => {
                 reuse.hideLoading();
                 reuse.defaultMessage("Orçamento cadastrado com sucesso", "positive");
+                this.router.go();
             })
             .catch((error) => {
                 reuse.hideLoading();
@@ -50,7 +55,7 @@ export const useBudgetStore = defineStore("budget", {
         getBudgets() {
             reuse.showLoading();
             api.get(`/budgets`).then((response) => {
-                this.budgets = response.data;
+                this.budgets = this.formatCurrency(response.data);
                 reuse.hideLoading();
                 reuse.defaultMessage("Orçamentos carregados com sucesso", "positive");
             })
@@ -64,7 +69,7 @@ export const useBudgetStore = defineStore("budget", {
             reuse.showLoading();
             api.post(`/budgets/filter`, filter).then((response) => {
                 reuse.hideLoading();
-                this.budgets = response.data;
+                this.budgets = this.formatCurrency(response.data);
                 reuse.defaultMessage("Orçamentos carregados com sucesso", "positive");
                 this.router.push({name: "budgets_index"});
             })
@@ -74,13 +79,24 @@ export const useBudgetStore = defineStore("budget", {
             });
         },
 
+        formatCurrency(budgets){
+            budgets.map(budget => {
+                budget.value = (budget.value).toLocaleString('pt-BR', { 
+                    style: 'currency', 
+                    currency: 'BRL' 
+                });
+            });
+            
+            return budgets;
+        },
+
         resetForm(){
             this.form = {
                 id: null,
                 client: "",
                 description: "",
                 value: null,
-                seller_id: null,
+                seller: null,
                 seller: {
                     name: "",
                     phone: "",
