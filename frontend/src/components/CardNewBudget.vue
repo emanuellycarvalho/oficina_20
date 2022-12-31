@@ -48,7 +48,7 @@
                         <div class="row justify-center">
                             <q-select 
                                 label="Vendedor" 
-                                v-model="budget.seller" 
+                                v-model="budget.seller_id" 
                                 name="seller" 
                                 option-value="id" 
                                 option-label="name" 
@@ -116,7 +116,7 @@ const resetForm = () => {
 }
 
 const createBudget = () => {
-    budgetStore.create(budget);
+    budgetStore.create(budget.value);
     newBudgetDialog.value = false;
 }
 
