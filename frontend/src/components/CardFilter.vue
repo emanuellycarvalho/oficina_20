@@ -54,19 +54,57 @@
                 <q-card-section>
                     <q-form>
                         <div class="row justify-center">
-                            <q-input class="col-12 q-pa-md" name="client" v-model="filter.client" color="red-5" label="Cliente" outlined clearable/>
+                            <q-input 
+                                label="Cliente" 
+                                v-model="filter.client" 
+                                name="client" 
+                                class="col-12 q-pa-md" 
+                                color="red-5" 
+                                outlined 
+                                clearable
+                            />
                         </div>
 
                         <div class="row justify-center">
-                            <q-select class="col-12 q-pa-md" name="seller" v-model="filter.seller" emit-value map-options color="red-5" option-value="id" option-label="name" :options="sellers" label="Vendedor" outlined/>
+                            <q-select 
+                                label="Vendedor" 
+                                v-model="filter.seller" 
+                                name="seller" 
+                                option-value="id" 
+                                option-label="name" 
+                                :options="sellers" 
+                                class="col-12 q-pa-md" 
+                                color="red-5" 
+                                emit-value 
+                                map-options 
+                                outlined
+                            />
                         </div>
                         
                         <div class="row justify-center">
-                        <q-input class="col-6 q-pa-md" v-model="filter.begin" type="date" stack-label mask="date" :rules="['date']" outlined color="red-5">
-                        </q-input>
+                            <q-input 
+                                label="Data de início"
+                                v-model="filter.begin" 
+                                type="date" 
+                                mask="date" 
+                                color="red-5"
+                                class="col-6 q-pa-md" 
+                                :rules="['date']" 
+                                stack-label 
+                                outlined 
+                            />
 
-                        <q-input class="col-6 q-pa-md" v-model="filter.end" type="date" stack-label mask="date" :rules="['date']" outlined color="red-5">
-                        </q-input>
+                            <q-input 
+                                label="Data de fim"
+                                v-model="filter.end" 
+                                type="date" 
+                                mask="date" 
+                                color="red-5"
+                                class="col-6 q-pa-md" 
+                                :rules="['date']" 
+                                stack-label 
+                                outlined 
+                            />
                         </div>
 
                         <div class="row justify-end q-mt-xl">

@@ -1,13 +1,13 @@
 <template>
     <q-table
-        class="q-pa-sm"
         title="Vendedores"
+        row-key="id"
+        class="q-pa-sm"
         :filter="filter"
         :rows="sellers"
         :columns="columns"
-        row-key="id"
-        virtual-scroll
         :pagination="pagination"
+        virtual-scroll
     >
 
         <template v-slot:top-right>

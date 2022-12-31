@@ -10,9 +10,6 @@
       :filter="stringFilter"
       :pagination="pagination"
     >
-      <template v-slot:top-right>
-
-      </template>
     </q-table>
   </div>
 </template>

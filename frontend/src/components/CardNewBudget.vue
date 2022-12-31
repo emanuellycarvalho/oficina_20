@@ -1,6 +1,12 @@
 <template>
     <div class="q-pa-md">
-        <q-btn label="Novo orçamento" size="lg" class="q-pa-md full-width" color="red-14" @click="newBudgetDialog = true"/>
+        <q-btn 
+            label="Novo orçamento" 
+            class="q-pa-md full-width" 
+            color="red-14" 
+            size="lg" 
+            @click="newBudgetDialog = true"
+        />
 
         <q-dialog v-model="newBudgetDialog">
             <q-card>
