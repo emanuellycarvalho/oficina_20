@@ -12,35 +12,53 @@
                 </q-bar>
 
                 <q-card-section>
-                    <q-form>
+                    <q-form @submit="createBudget()">
                         <div class="row justify-center">
-                            <q-input class="col-6 q-pa-lg" autofocus hint="Nome e sobrenome" name="client" v-model="budget.client" color="red-5" label="Cliente" outlined clearable/>
                             <q-input 
+                                label="Cliente" 
+                                hint="Nome e sobrenome" 
+                                v-model="budget.client" 
+                                name="client" 
                                 class="col-6 q-pa-lg" 
+                                color="red-5" 
+                                autofocus 
                                 outlined 
-                                v-model="budget.value" 
+                                clearable
+                                :rules="[val => !!val || 'Obrigatório']"
+                            />
+                            
+                            <q-input 
                                 label="Valor" 
-                                color="red-14"
+                                v-model="budget.value" 
+                                name="value"
                                 prefix="$"
                                 mask="#,##"
                                 fill-mask="0"
+                                class="col-6 q-pa-lg" 
+                                color="red-14"
+                                outlined 
                                 reverse-fill-mask
+                                :rules="[
+                                    val => !!val || 'Obrigatório',
+                                    val => parseFloat(val) > 0 || 'O valor precisa ser maior que zero'
+                                ]"
                             />
                         </div>
 
                         <div class="row justify-center">
                             <q-select 
-                                class="col-12 q-pa-lg" 
-                                name="seller" 
+                                label="Vendedor" 
                                 v-model="budget.seller" 
-                                emit-value 
-                                map-options 
-                                color="red-5" 
+                                name="seller" 
                                 option-value="id" 
                                 option-label="name" 
                                 :options="sellers" 
-                                label="Vendedor" 
+                                class="col-12 q-pa-lg" 
+                                color="red-14" 
+                                emit-value 
+                                map-options 
                                 outlined
+                                :rules="[val => !!val || 'Obrigatório']"
                             > 
 
                                 <template v-slot:after>
@@ -51,16 +69,18 @@
                         
                         <div class="row justify-center">
                             <q-input
-                                v-model="budget.description"
-                                outlined
-                                type="textarea"
                                 label="Descrição"
+                                v-model="budget.description"
+                                type="textarea"
                                 color="red-5"
                                 class="col-12 q-pa-lg" 
+                                outlined
+                                :rules="[val => !!val || 'Obrigatório']"
                             />
                         </div>
 
                         <div class="row justify-end q-mt-xl">
+                            <q-btn label="Cadastrar" type="submit" color="red-5"/>
                             <q-btn label="Limpar" @click.prevent.stop="resetForm()" color="red-5" flat class="q-ml-sm" />
                         </div>
                     </q-form>
@@ -71,7 +91,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue';
+import { ref } from 'vue';
 import { useBudgetStore } from "src/stores/budget";
 
 const budgetStore = useBudgetStore();
@@ -93,6 +113,11 @@ const resetForm = () => {
         value: null,
         seller_id: null
     }
+}
+
+const createBudget = () => {
+    budgetStore.create(budget);
+    newBudgetDialog.value = false;
 }
 
 const props = defineProps({

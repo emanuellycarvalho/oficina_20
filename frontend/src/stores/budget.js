@@ -35,6 +35,18 @@ export const useBudgetStore = defineStore("budget", {
     },
 
     actions: {
+        create(budget){
+            reuse.showLoading();
+            api.get(`/budgets`, budget).then((response) => {
+                reuse.hideLoading();
+                reuse.defaultMessage("Orçamento cadastrado com sucesso", "positive");
+            })
+            .catch((error) => {
+                reuse.hideLoading();
+                reuse.defaultMessage("Houve um erro ao cadastrar o orçamento", "negative", error);
+            });
+        },
+
         getBudgets() {
             reuse.showLoading();
             api.get(`/budgets`).then((response) => {
