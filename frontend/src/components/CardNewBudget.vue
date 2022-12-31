@@ -3,16 +3,16 @@
         <q-btn 
             label="Novo orçamento" 
             class="q-pa-md full-width" 
-            color="red-14" 
+            color="primary" 
             size="lg" 
             @click="newBudgetDialog = true"
         />
 
         <q-dialog v-model="newBudgetDialog">
             <q-card>
-                <q-bar>
+                <q-bar class="bg-primary">
                     <q-space />
-                    <q-btn dense flat icon="close" v-close-popup>
+                    <q-btn dense flat icon="close" v-close-popup color="secondary">
                         <q-tooltip>Fechar</q-tooltip>
                     </q-btn>
                 </q-bar>
@@ -26,7 +26,7 @@
                                 v-model="budget.client" 
                                 name="client" 
                                 class="col-6 q-pa-lg" 
-                                color="red-5" 
+                                color="secondary" 
                                 autofocus 
                                 outlined 
                                 clearable
@@ -41,7 +41,7 @@
                                 mask="#,##"
                                 fill-mask="0"
                                 class="col-6 q-pa-lg" 
-                                color="red-14"
+                                color="primary"
                                 outlined 
                                 reverse-fill-mask
                                 :rules="[
@@ -60,7 +60,7 @@
                                 option-label="name" 
                                 :options="sellers" 
                                 class="col-12 q-pa-lg" 
-                                color="red-14" 
+                                color="primary" 
                                 emit-value 
                                 map-options 
                                 outlined
@@ -68,7 +68,7 @@
                             > 
 
                                 <template v-slot:after>
-                                    <q-btn round dense flat icon="add" text-color="white" class="bg-red-14"/>
+                                    <q-btn round dense flat icon="add" text-color="white" class="bg-primary"/>
                                 </template>
                             </q-select>
                         </div>
@@ -78,7 +78,7 @@
                                 label="Descrição"
                                 v-model="budget.description"
                                 type="textarea"
-                                color="red-5"
+                                color="secondary"
                                 class="col-12 q-pa-lg" 
                                 outlined
                                 :rules="[val => !!val || 'Obrigatório']"
@@ -86,8 +86,8 @@
                         </div>
 
                         <div class="row justify-end q-mt-xl">
-                            <q-btn label="Cadastrar" type="submit" color="red-5"/>
-                            <q-btn label="Limpar" @click.prevent.stop="resetForm()" color="red-5" flat class="q-ml-sm" />
+                            <q-btn label="Cadastrar" type="submit" color="secondary"/>
+                            <q-btn label="Limpar" @click.prevent.stop="resetForm()" color="secondary" flat class="q-ml-sm" />
                         </div>
                     </q-form>
                 </q-card-section>

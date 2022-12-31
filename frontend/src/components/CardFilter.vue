@@ -1,7 +1,7 @@
 <template>
     <div class="q-pa-md">
         <q-card class="my-card">
-            <q-card-section class="bg-red-14 text-white">
+            <q-card-section class="bg-primary text-white">
                 <div class="text-h6 text-center">FILTRAR ORÇAMENTOS</div>
             </q-card-section>
 
@@ -28,7 +28,7 @@
                     icon="filter_alt"
                     label="Fitrar"
                     @click="filterDialog = true"
-                    class="q-ml-md bg-red-5 col-5"
+                    class="q-ml-md bg-secondary col-5"
                     text-color="white"
                 />
                 <q-btn 
@@ -37,16 +37,16 @@
                     label="Remover" 
                     @click.prevent.stop="() => { resetFilter(); $emit('filter', filter); }" 
                     class="q-ml-sm col-5" 
-                    color="red-5"  
+                    color="secondary"  
                 />                
             </q-card-actions>
         </q-card>
 
         <q-dialog v-model="filterDialog">
             <q-card>
-                <q-bar>
+                <q-bar class="bg-primary">
                     <q-space />
-                    <q-btn dense flat icon="close" v-close-popup>
+                    <q-btn dense flat icon="close" v-close-popup color="secondary">
                         <q-tooltip>Fechar</q-tooltip>
                     </q-btn>
                 </q-bar>
@@ -59,7 +59,7 @@
                                 v-model="filter.client" 
                                 name="client" 
                                 class="col-12 q-pa-md" 
-                                color="red-5" 
+                                color="secondary" 
                                 outlined 
                                 clearable
                             />
@@ -74,7 +74,7 @@
                                 option-label="name" 
                                 :options="sellers" 
                                 class="col-12 q-pa-md" 
-                                color="red-5" 
+                                color="secondary" 
                                 emit-value 
                                 map-options 
                                 outlined
@@ -87,7 +87,7 @@
                                 v-model="filter.begin" 
                                 type="date" 
                                 mask="date" 
-                                color="red-5"
+                                color="secondary"
                                 class="col-6 q-pa-md" 
                                 :rules="['date']" 
                                 stack-label 
@@ -99,7 +99,7 @@
                                 v-model="filter.end" 
                                 type="date" 
                                 mask="date" 
-                                color="red-5"
+                                color="secondary"
                                 class="col-6 q-pa-md" 
                                 :rules="['date']" 
                                 stack-label 
@@ -108,8 +108,8 @@
                         </div>
 
                         <div class="row justify-end q-mt-xl">
-                            <q-btn label="Filtrar" @click="() => {$emit('filter', filter); filterDialog = false; filterOn = true;}" color="red-5"/>
-                            <q-btn label="Limpar" @click.prevent.stop="resetFilter()" color="red-5" flat class="q-ml-sm" />
+                            <q-btn label="Filtrar" @click="() => {$emit('filter', filter); filterDialog = false; filterOn = true;}" color="secondary"/>
+                            <q-btn label="Limpar" @click.prevent.stop="resetFilter()" color="secondary" flat class="q-ml-sm" />
                         </div>
                     </q-form>
                 </q-card-section>

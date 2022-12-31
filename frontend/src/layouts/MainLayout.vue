@@ -1,7 +1,7 @@
 <template>
   <q-layout>
     <q-header>
-      <q-bar class="bg-red-14">
+      <q-bar class="bg-primary">
         <q-icon name="directions_car"/>
         <div>Oficina 2.0</div>
 
@@ -12,7 +12,7 @@
           <q-btn dense flat disabled icon="close" />
       </q-bar>
 
-      <div class="bg-red-5 q-pa-sm q-pl-md row items-center">
+      <div class="bg-secondary q-pa-sm q-pl-md row items-center">
         <q-tabs>
           <q-route-tab exact name="home" to="/" label="Home" />
           <q-route-tab exact name="sellers" to="/sellers" label="Vendedores" />
