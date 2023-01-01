@@ -4,6 +4,7 @@ import { Notify, Loading, date } from "quasar";
 const reuse = {
     defaultMessage(message, type = "secondary", error = "", time = 10000) {
         if (type == "negative" && error.response) {
+            let errorMessage;
             errorMessage = `<br/> ${error.response?.data?.message} <br/> Status ${error.response?.status} ${error.response?.statusText}`;
             message = `${message} ${errorMessage}`
         }
