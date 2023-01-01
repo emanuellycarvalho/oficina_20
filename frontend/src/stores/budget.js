@@ -66,7 +66,7 @@ export const useBudgetStore = defineStore("budget", {
         getBudgets() {
             reuse.showLoading();
             api.get(`/budgets`).then((response) => {
-                this.budgets = this.reuse.floatToCurrencyArrayFormatter(response.data);
+                this.budgets = reuse.floatToCurrencyArrayFormatter(response.data);
                 reuse.hideLoading();
                 reuse.defaultMessage("Orçamentos carregados com sucesso", "positive");
             })
@@ -80,7 +80,7 @@ export const useBudgetStore = defineStore("budget", {
             reuse.showLoading();
             api.post(`/budgets/filter`, filter).then((response) => {
                 reuse.hideLoading();
-                this.budgets = this.reuse.floatToCurrencyArrayFormatter(response.data);
+                this.budgets = reuse.floatToCurrencyArrayFormatter(response.data);
                 reuse.defaultMessage("Orçamentos carregados com sucesso", "positive");
                 this.router.push({name: "budgets_index"});
             })

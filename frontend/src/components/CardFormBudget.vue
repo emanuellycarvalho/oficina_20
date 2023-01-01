@@ -131,6 +131,9 @@ onMounted(() =>{
     if(props.budgetToEdit){
         budget.value = props.budgetToEdit;
         budget.value.value = reuse.currencyToFloatFormatter(props.budgetToEdit.value);
+        if(budget.value.value % 1 == 0){
+            budget.value.value = budget.value.value * 100;
+        }
     }
 });
 
