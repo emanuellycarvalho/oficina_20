@@ -34,10 +34,11 @@ const reuse = {
     },
 
     currencyToFloatFormatter(currency){
-        let result = currency.replace('R$', ''); 
-        result = result.replace('.', ''); 
-        result = result.replace(',', '.');
+        let result = currency.replace("R$", ""); 
+        result = result.replace(".", ""); 
+        result = result.replace(",", ".");
         result = parseFloat(result);
+
         return result;
     },
 
