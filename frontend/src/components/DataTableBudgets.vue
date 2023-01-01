@@ -39,7 +39,7 @@
                     <q-separator />
 
                     <q-card-section class="q-gutter-sm row justify-end">
-                        <q-btn round size="sm" color="accent" icon="edit">
+                        <q-btn round size="sm" color="accent" icon="edit" @click="$emit('editBudget', props.row)">
                             <q-tooltip>Editar</q-tooltip>
                         </q-btn>
                         <q-btn round size="sm" color="red" icon="delete">
@@ -49,14 +49,31 @@
                 </q-card>
             </div>
         </template>
-
     </q-table>
+
+    
   </div>
 </template>
 
 <script setup>
 import { ref } from "vue";
+import { useBudgetStore } from "src/stores/budget";
+import { useSellerStore } from "src/stores/seller";
+
+import CardFormBudget from 'src/components/CardFormBudget.vue';
+
+const budgetStore = useBudgetStore();
+const sellerStore = useSellerStore();
+const newBudgetDialog = ref(false);
 const stringFilter = ref(null);
+
+const budget = ref({
+    id: null,
+    client: "",
+    description: "",
+    value: null,
+    seller_id: null
+});
 
 const props = defineProps({
     budgets: Array,
@@ -65,6 +82,11 @@ const props = defineProps({
 const pagination = ref({
     rowsPerPage: 6
 });
+
+const editBudget = (budget1) => {
+    budget.value = budget1;
+    newBudgetDialog.value = true;
+}
 
 const columns = ref([
     {

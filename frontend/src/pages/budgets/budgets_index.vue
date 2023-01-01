@@ -9,17 +9,17 @@
                         class="q-pa-md full-width" 
                         color="primary" 
                         size="lg" 
-                        @click="newBudgetDialog = true"
+                        @click="createBudget()"
                     />
 
                     <q-dialog v-model="newBudgetDialog">
-                        <CardFormBudget :sellers="sellerStore.sellers" :budget="null"></CardFormBudget>
+                        <CardFormBudget :sellers="sellerStore.sellers" :budgetToEdit="budget" :mode="formBudgetMode"></CardFormBudget>
                     </q-dialog>
                 </div>
             </div>
 
             <div class="col-lg-9 col-md-8 col-sm-12">
-                <DataTableBudgets :budgets="budgetStore.budgets"></DataTableBudgets>
+                <DataTableBudgets :budgets="budgetStore.budgets" @editBudget="editBudget($event)"></DataTableBudgets>
             </div>
         </div>
     </q-page>
@@ -36,11 +36,24 @@ import CardFilters from "src/components/CardFilter.vue";
 const budgetStore = useBudgetStore();
 const sellerStore = useSellerStore();
 
+const budget = ref(null);
+const formBudgetMode = ref("");
 const newBudgetDialog = ref(false);
 
 const filter = (filter) => {
     budgetStore.filter = filter;
     budgetStore.filterBudgets(filter); 
+}
+
+const createBudget = () => {
+    formBudgetMode.value = "Cadastrar";
+    newBudgetDialog.value = true;
+}
+
+const editBudget = (budget1) => {
+    budget.value = budget1;
+    formBudgetMode.value = "Editar";
+    newBudgetDialog.value = true;
 }
 
 onMounted(() =>{

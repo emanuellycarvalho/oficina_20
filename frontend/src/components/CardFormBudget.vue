@@ -1,6 +1,9 @@
 <template>
     <q-card>
         <q-bar class="bg-primary">
+            <div class="text-white">
+                {{  props.mode }} orçamento
+            </div>
             <q-space />
             <q-btn dense flat icon="close" v-close-popup color="secondary">
                 <q-tooltip>Fechar</q-tooltip>
@@ -25,7 +28,7 @@
                     
                     <q-input 
                         label="Valor" 
-                        v-model="budget.serviceValue" 
+                        v-model="budget.value" 
                         name="value"
                         prefix="$"
                         mask="#,##"
@@ -85,17 +88,17 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { reuse } from "boot/reuse";
+import { ref, onMounted } from 'vue';
 import { useBudgetStore } from "src/stores/budget";
 
 const budgetStore = useBudgetStore();
-
 const newBudgetDialog = ref(false);
 const budget = ref({
     id: null,
     client: "",
     description: "",
-    serviceValue: null,
+    value: null,
     seller_id: null
 });
 
@@ -104,7 +107,7 @@ const resetForm = () => {
         id: null,
         client: "",
         description: "",
-        serviceValue: null,
+        value: null,
         seller_id: null
     }
 }
@@ -115,9 +118,16 @@ const createBudget = () => {
 }
 
 const props = defineProps({
+    mode: String,
     sellers: Array,
-    budget: Object,
-    isOn: Boolean
+    budgetToEdit: Object,
+});
+
+onMounted(() =>{
+    if(props.budgetToEdit){
+        budget.value = props.budgetToEdit;
+        budget.value.value = reuse.currencyToFloatFormatter(props.budgetToEdit.value);
+    }
 });
 
 </script>
