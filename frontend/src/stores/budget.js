@@ -37,10 +37,7 @@ export const useBudgetStore = defineStore("budget", {
     actions: {
         create(budget){
             reuse.showLoading();
-            budget.value = budget.value.replace('.', ''); 
-            budget.value = budget.value.replace(',', '.');
-            budget.value = parseFloat(budget.value);
-            console.log(budget);
+            budget.value = reuse.currencyToFloatFormatter(budget.value);
             api.post(`/budgets`, budget).then((response) => {
                 reuse.hideLoading();
                 reuse.defaultMessage("Orçamento cadastrado com sucesso", "positive");

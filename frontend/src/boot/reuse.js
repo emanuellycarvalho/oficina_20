@@ -31,6 +31,14 @@ const reuse = {
         let dataTimestamp = +new Date(dateTime);
         return date.formatDate(dataTimestamp, format);
     },
+
+    currencyToFloatFormatter(currency){
+        let result = currency.replace('R$', ''); 
+        result = result.replace('.', ''); 
+        result = result.replace(',', '.');
+        result = parseFloat(result);
+        return result;
+    }
 };
 export default boot(({ app }) => {
     // for use inside Vue files (Options API) through this.$axios and this.$api
