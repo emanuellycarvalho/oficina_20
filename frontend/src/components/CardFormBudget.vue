@@ -11,7 +11,7 @@
         </q-bar>
 
         <q-card-section>
-            <q-form @submit="createBudget()">
+            <q-form @submit="submitBudget()">
                 <div class="row justify-center">
                     <q-input 
                         label="Cliente" 
@@ -79,7 +79,7 @@
                 </div>
 
                 <div class="row justify-end q-mt-xl">
-                    <q-btn label="Cadastrar" type="submit" color="secondary"/>
+                    <q-btn label="Salvar" type="submit" color="secondary"/>
                     <q-btn label="Limpar" @click.prevent.stop="resetForm()" color="secondary" flat class="q-ml-sm" />
                 </div>
             </q-form>
@@ -112,8 +112,12 @@ const resetForm = () => {
     }
 }
 
-const createBudget = () => {
-    budgetStore.create(budget.value);
+const submitBudget = () => {
+    if(props.mode == "Cadastrar")
+        budgetStore.create(budget.value);
+    else
+        budgetStore.update(budget.value);
+    
     newBudgetDialog.value = false;
 }
 
