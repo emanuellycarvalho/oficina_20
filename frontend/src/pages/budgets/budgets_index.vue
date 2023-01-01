@@ -3,7 +3,19 @@
         <div class="row">
             <div class="col-lg-3 col-md-3 col-sm-12">
                 <CardFilters :currentFilter="budgetStore.filter" :sellers="sellerStore.sellers" @filter="filter($event)"></CardFilters>
-                <CardNewBudget :sellers="sellerStore.sellers"></CardNewBudget>
+                <div id="new-budget" class="q-pa-md">
+                    <q-btn 
+                        label="Novo orçamento" 
+                        class="q-pa-md full-width" 
+                        color="primary" 
+                        size="lg" 
+                        @click="newBudgetDialog = true"
+                    />
+
+                    <q-dialog v-model="newBudgetDialog">
+                        <CardFormBudget :sellers="sellerStore.sellers" :budget="null"></CardFormBudget>
+                    </q-dialog>
+                </div>
             </div>
 
             <div class="col-lg-9 col-md-8 col-sm-12">
@@ -14,15 +26,17 @@
 </template>
 
 <script setup>
-import { onMounted } from 'vue';
+import { ref, onMounted } from 'vue';
 import { useBudgetStore } from "src/stores/budget";
 import { useSellerStore } from "src/stores/seller";
 import DataTableBudgets from "/src/components/DataTableBudgets.vue";
-import CardNewBudget from 'src/components/CardNewBudget.vue';
+import CardFormBudget from 'src/components/CardFormBudget.vue';
 import CardFilters from "src/components/CardFilter.vue";
 
 const budgetStore = useBudgetStore();
 const sellerStore = useSellerStore();
+
+const newBudgetDialog = ref(false);
 
 const filter = (filter) => {
     budgetStore.filter = filter;
