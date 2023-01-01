@@ -46,6 +46,7 @@ const filter = (filter) => {
 }
 
 const createBudget = () => {
+    budget.value = null;
     formBudgetMode.value = "Cadastrar";
     newBudgetDialog.value = true;
 }
