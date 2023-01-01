@@ -49,10 +49,24 @@ export const useBudgetStore = defineStore("budget", {
             });
         },
 
+        update(budget){
+            reuse.showLoading();
+            budget.value = reuse.currencyToFloatFormatter(budget.value);
+            api.patch(`/budgets?budget={${budget.id}}`, budget).then((response) => {
+                reuse.hideLoading();
+                reuse.defaultMessage("Orçamento atualizado com sucesso", "positive");
+                this.router.go();
+            })
+            .catch((error) => {
+                reuse.hideLoading();
+                reuse.defaultMessage("Houve um erro ao atualizar o orçamento", "negative", error);
+            });
+        },
+
         getBudgets() {
             reuse.showLoading();
             api.get(`/budgets`).then((response) => {
-                this.budgets = this.formatCurrency(response.data);
+                this.budgets = this.reuse.floatToCurrencyArrayFormatter(response.data);
                 reuse.hideLoading();
                 reuse.defaultMessage("Orçamentos carregados com sucesso", "positive");
             })
@@ -66,7 +80,7 @@ export const useBudgetStore = defineStore("budget", {
             reuse.showLoading();
             api.post(`/budgets/filter`, filter).then((response) => {
                 reuse.hideLoading();
-                this.budgets = this.formatCurrency(response.data);
+                this.budgets = this.reuse.floatToCurrencyArrayFormatter(response.data);
                 reuse.defaultMessage("Orçamentos carregados com sucesso", "positive");
                 this.router.push({name: "budgets_index"});
             })
@@ -74,17 +88,6 @@ export const useBudgetStore = defineStore("budget", {
                 reuse.hideLoading();
                 reuse.defaultMessage("Houve um erro ao carregar os orçamentos", "negative", error);
             });
-        },
-
-        formatCurrency(budgets){
-            budgets.map(budget => {
-                budget.value = (budget.value).toLocaleString('pt-BR', { 
-                    style: 'currency', 
-                    currency: 'BRL' 
-                });
-            });
-            
-            return budgets;
         },
 
         resetForm(){
