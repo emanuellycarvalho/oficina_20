@@ -42,18 +42,21 @@ const reuse = {
         return result;
     },
 
-    floatToCurrencyArrayFormatter(array){
-        array.map(item => {
-            item.value = (item.value).toLocaleString('pt-BR', { 
-                style: "currency", 
-                currency: "BRL" 
-            });
-
-            if(item.value.search(",") == -1){
-                item.value += ",00";
-            }
+    floatToCurrencyFormatter(item){
+        item.value = (item.value).toLocaleString('pt-BR', { 
+            style: "currency", 
+            currency: "BRL" 
         });
+
+        if(item.value.search(",") == -1){
+            item.value += ",00";
+        }
         
+        return item;
+    },
+
+    floatToCurrencyArrayFormatter(array){
+        array.map(item => this.floatToCurrencyFormatter(item));
         return array;
     }
 };
