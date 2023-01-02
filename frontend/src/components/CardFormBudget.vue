@@ -51,7 +51,7 @@
                         name="seller" 
                         option-value="id" 
                         option-label="name" 
-                        :options="sellers" 
+                        :options="sellerStore.sellers" 
                         class="col-12 q-pa-lg" 
                         color="primary" 
                         emit-value 
@@ -61,7 +61,15 @@
                     > 
 
                         <template v-slot:after>
-                            <q-btn round dense flat icon="add" text-color="white" class="bg-primary"/>
+                            <q-btn 
+                                @click="newSellerName()"
+                                class="bg-primary"
+                                text-color="white" 
+                                icon="add" 
+                                round 
+                                dense 
+                                flat 
+                            />
                         </template>
                     </q-select>
                 </div>
@@ -88,13 +96,18 @@
 </template>
 
 <script setup>
+import { useQuasar } from "quasar";
 import { reuse } from "boot/reuse";
 import { ref, onMounted } from 'vue';
 import { useBudgetStore } from "src/stores/budget";
+import { useSellerStore } from "src/stores/seller";
 
-const budgetStore = useBudgetStore();
+const $q = useQuasar();
 const formattedValue = ref("");
 const newBudgetDialog = ref(false);
+const budgetStore = useBudgetStore();
+const sellerStore = useSellerStore();
+
 const budget = ref({
     id: null,
     client: "",
@@ -102,6 +115,59 @@ const budget = ref({
     value: null,
     seller_id: null
 });
+
+const seller = ref({
+    name: "",
+    phone: "",
+    active: true
+});
+
+const newSellerName = () => {
+    $q.dialog({
+        title: "Cadastrar vendedor",
+        message: "Nome",
+        prompt: {
+          model: "",
+        },
+        cancel: {
+            label: "Cancelar",
+            color: "secondary"
+        },
+        ok: {
+            label: "Próximo",
+            color: "primary"
+        },
+
+        persistent: true
+      }).onOk(data => {
+        seller.value.name = data;
+        newSellerPhone();
+      });
+}
+
+const newSellerPhone = () => {
+    $q.dialog({
+        title: "Cadastrar vendedor",
+        message: "Telefone",
+        prompt: {
+          model: "",
+          type: "number"
+        },
+        cancel: {
+            label: "Cancelar",
+            color: "secondary"
+        },
+        ok: {
+            label: "Salvar",
+            color: "primary"
+        },
+
+        persistent: true
+      }).onOk(data => {
+        seller.value.phone = data;
+        sellerStore.create(seller.value);
+    });
+}
 
 const resetForm = () => {
     budget.value = {
@@ -126,7 +192,6 @@ const submitBudget = () => {
 
 const props = defineProps({
     mode: String,
-    sellers: Array,
     budgetToEdit: Object,
 });
 

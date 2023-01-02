@@ -13,7 +13,7 @@
                     />
 
                     <q-dialog v-model="newBudgetDialog">
-                        <CardFormBudget :sellers="sellerStore.sellers" :budgetToEdit="budget" :mode="formBudgetMode"></CardFormBudget>
+                        <CardFormBudget :budgetToEdit="budget" :mode="formBudgetMode"></CardFormBudget>
                     </q-dialog>
                 </div>
             </div>

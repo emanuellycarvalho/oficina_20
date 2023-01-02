@@ -22,6 +22,19 @@ export const useSellerStore = defineStore("seller", {
     },
 
     actions: {
+        create(seller){
+            reuse.showLoading();
+            api.post(`/sellers`, seller).then((response) => {
+                reuse.hideLoading();
+                reuse.defaultMessage("Vendedor cadastrado com sucesso", "positive");
+                this.getActiveSellers();
+            })
+            .catch((error) => {
+                reuse.hideLoading();
+                reuse.defaultMessage("Houve um erro ao cadastrar o vendedor", "negative", error);
+            });
+        },
+
         getSellers() {
             reuse.showLoading();
             api.get(`/sellers`).then((response) => {
