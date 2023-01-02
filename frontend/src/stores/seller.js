@@ -27,7 +27,6 @@ export const useSellerStore = defineStore("seller", {
             api.get(`/sellers`).then((response) => {
                 this.sellers = response.data;
                 reuse.hideLoading();
-                reuse.defaultMessage("Vendedores carregados com sucesso", "positive");
             })
             .catch((error) => {
                 reuse.hideLoading();
@@ -40,7 +39,6 @@ export const useSellerStore = defineStore("seller", {
             api.get(`/sellers/active`).then((response) => {
                 this.sellers = response.data;
                 reuse.hideLoading();
-                reuse.defaultMessage("Vendedores carregados com sucesso", "positive");
             })
             .catch((error) => {
                 reuse.hideLoading();

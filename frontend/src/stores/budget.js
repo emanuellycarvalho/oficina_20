@@ -52,14 +52,27 @@ export const useBudgetStore = defineStore("budget", {
         update(budget){
             reuse.showLoading();
             budget.value = reuse.currencyToFloatFormatter(budget.value);
-            api.patch(`/budgets?budget={${budget.id}}`, budget).then((response) => {
+            api.put(`/budgets/${budget.id}`, budget).then((response) => {
                 reuse.hideLoading();
                 reuse.defaultMessage("Orçamento atualizado com sucesso", "positive");
                 this.router.go();
             })
             .catch((error) => {
-                reuse.hideLoading();
+                reuse.hideLoading() ;
                 reuse.defaultMessage("Houve um erro ao atualizar o orçamento", "negative", error);
+            });
+        },
+
+        destroy(budget_id){
+            reuse.showLoading();
+            api.delete(`/budgets/${budget_id}`).then((response) => {
+                reuse.hideLoading();
+                reuse.defaultMessage("Orçamento excluído com sucesso", "positive");
+                this.router.go();
+            })
+            .catch((error) => {
+                reuse.hideLoading();
+                reuse.defaultMessage("Houve um erro ao excluir o orçamento", "negative", error);
             });
         },
 
@@ -68,7 +81,6 @@ export const useBudgetStore = defineStore("budget", {
             api.get(`/budgets`).then((response) => {
                 this.budgets = reuse.floatToCurrencyArrayFormatter(response.data);
                 reuse.hideLoading();
-                reuse.defaultMessage("Orçamentos carregados com sucesso", "positive");
             })
             .catch((error) => {
                 reuse.hideLoading();
@@ -81,12 +93,12 @@ export const useBudgetStore = defineStore("budget", {
             api.post(`/budgets/filter`, filter).then((response) => {
                 reuse.hideLoading();
                 this.budgets = reuse.floatToCurrencyArrayFormatter(response.data);
-                reuse.defaultMessage("Orçamentos carregados com sucesso", "positive");
+                reuse.defaultMessage("Orçamentos filtrados com sucesso", "positive");
                 this.router.push({name: "budgets_index"});
             })
             .catch((error) => {
                 reuse.hideLoading();
-                reuse.defaultMessage("Houve um erro ao carregar os orçamentos", "negative", error);
+                reuse.defaultMessage("Houve um erro ao filtrar os orçamentos", "negative", error);
             });
         },
 
