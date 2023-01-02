@@ -28,9 +28,9 @@
                     
                     <q-input 
                         label="Valor" 
-                        v-model="budget.value" 
+                        v-model="formattedValue" 
                         name="value"
-                        prefix="$"
+                        prefix="R$"
                         mask="#,##"
                         fill-mask="0"
                         class="col-6 q-pa-lg" 
@@ -93,6 +93,7 @@ import { ref, onMounted } from 'vue';
 import { useBudgetStore } from "src/stores/budget";
 
 const budgetStore = useBudgetStore();
+const formattedValue = ref("");
 const newBudgetDialog = ref(false);
 const budget = ref({
     id: null,
@@ -113,6 +114,8 @@ const resetForm = () => {
 }
 
 const submitBudget = () => {
+    budget.value.value = formattedValue.value;
+
     if(props.mode == "Cadastrar")
         budgetStore.create(budget.value);
     else
@@ -130,9 +133,9 @@ const props = defineProps({
 onMounted(() =>{
     if(props.budgetToEdit){
         budget.value = props.budgetToEdit;
-        budget.value.value = reuse.currencyToFloatFormatter(props.budgetToEdit.value);
-        if(budget.value.value % 1 == 0){
-            budget.value.value = budget.value.value * 100;
+        formattedValue.value = reuse.currencyToFloatFormatter(props.budgetToEdit.value);
+        if(formattedValue.value % 1 == 0){
+            formattedValue.value = formattedValue.value * 100;
         }
     }
 });
