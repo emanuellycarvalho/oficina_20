@@ -42,7 +42,7 @@
                         <q-btn round size="sm" color="accent" icon="edit" @click="$emit('editBudget', props.row)">
                             <q-tooltip>Editar</q-tooltip>
                         </q-btn>
-                        <q-btn round size="sm" color="red" icon="delete">
+                        <q-btn round size="sm" color="red" icon="delete" @click="confirmDestroy(props.row)">
                             <q-tooltip>Excluir</q-tooltip>
                         </q-btn>
                     </q-card-section>
@@ -57,15 +57,14 @@
 
 <script setup>
 import { ref } from "vue";
+import { useQuasar } from "quasar";
 import { useBudgetStore } from "src/stores/budget";
 import { useSellerStore } from "src/stores/seller";
 
-import CardFormBudget from 'src/components/CardFormBudget.vue';
-
 const budgetStore = useBudgetStore();
-const sellerStore = useSellerStore();
 const newBudgetDialog = ref(false);
 const stringFilter = ref(null);
+const $q = useQuasar();
 
 const budget = ref({
     id: null,
@@ -86,6 +85,25 @@ const pagination = ref({
 const editBudget = (budget1) => {
     budget.value = budget1;
     newBudgetDialog.value = true;
+}
+
+const confirmDestroy = (budget) => {
+    $q.dialog({
+    title: `Confirmar`,
+    message: `Tem certeza que deseja excluir o orçamento de <br> <b>${budget.seller.name}</b> com o(a) cliente <br> <b>${budget.client}</b>?`,
+    html: true,
+    cancel: {
+        label: "Cancelar",
+        color: "secondary"
+    },
+    ok: {
+        label: "Excluir",
+        color: "negative"
+    },
+    persistent: false
+    }).onOk(() => {
+        budgetStore.destroy(budget.id);
+    });
 }
 
 const columns = ref([
