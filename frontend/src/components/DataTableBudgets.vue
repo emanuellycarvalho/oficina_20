@@ -59,7 +59,6 @@
 import { ref } from "vue";
 import { useQuasar } from "quasar";
 import { useBudgetStore } from "src/stores/budget";
-import { useSellerStore } from "src/stores/seller";
 
 const budgetStore = useBudgetStore();
 const newBudgetDialog = ref(false);
@@ -81,11 +80,6 @@ const props = defineProps({
 const pagination = ref({
     rowsPerPage: 6
 });
-
-const editBudget = (budget1) => {
-    budget.value = budget1;
-    newBudgetDialog.value = true;
-}
 
 const confirmDestroy = (budget) => {
     $q.dialog({
