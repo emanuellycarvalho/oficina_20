@@ -128,6 +128,7 @@ const newSellerName = () => {
         message: "Nome",
         prompt: {
           model: "",
+          isValid: val => val.length > 1,
         },
         cancel: {
             label: "Cancelar",
@@ -151,7 +152,7 @@ const newSellerPhone = () => {
         message: "Telefone",
         prompt: {
           model: "",
-          type: "number"
+          mask: "(##) #####-####"
         },
         cancel: {
             label: "Cancelar",
