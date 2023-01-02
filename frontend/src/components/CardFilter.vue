@@ -127,7 +127,7 @@ const emits = ['filter']
 const sellerStore = useSellerStore();
 const filterDialog = ref(false);
 const filterOn = ref(false);
-const currentSeller = ref("");
+const currentSeller = ref({});
 const filter = ref({
     client: "",
     seller: "",
