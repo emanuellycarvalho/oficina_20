@@ -23,6 +23,9 @@ Route::prefix('sellers/')->group(function () {
 });
 
 Route::prefix('budgets/')->group(function () {
+    Route::get('', [BudgetController::class, 'index']);
+    Route::post('', [BudgetController::class, 'store']);
     Route::post('filter', [BudgetController::class, 'filter']);
-    Route::resource('/', BudgetController::class);
+    Route::put('{budget}', [BudgetController::class, 'update']);
+    Route::delete('{budget}', [BudgetController::class, 'destroy']);
 });

@@ -53,9 +53,9 @@ class BudgetController extends Controller
      * @param  \App\Models\Budget  $budget
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateBudgetRequest $request, Budget $budget)
+    public function update(Request $request, Budget $budget)
     {
-        $works = $budget->update($request->validated());
+        $works = $budget->update($request->all());
         if($works){
             return response()->json([
                 'status' => 200,
@@ -71,7 +71,7 @@ class BudgetController extends Controller
      */
     public function destroy(Budget $budget)
     {
-        $works = $budget->destroy();
+        $works = $budget->delete();
         if($works){
             return response()->json([
                 'status' => 200,
